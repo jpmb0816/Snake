@@ -1,3 +1,4 @@
+
 class GameEngine {
 	constructor() {
 		this.title = 'Snake';
@@ -27,7 +28,6 @@ class GameEngine {
 		this.snake = null;
 
 		this.recentlyStarted = true;
-		this.running = false;
 
 		this.createCanvas(this.MAX_WIDTH, this.MAX_HEIGHT);
 	}
@@ -39,7 +39,7 @@ class GameEngine {
 	}
 
 	update() {
-		if (this.snake) {
+		if (this.snake && this.snake.alive) {
 			this.snake.update();
 		}
 	}
@@ -79,7 +79,6 @@ class GameEngine {
 		this.renderText('[Press Enter to Play]', this.centerX, 340, 'white', 'center', '15px san-serif');
 
 		if (keypress[13] && globalName.length > 0) {
-			this.running = true;
 			this.recentlyStarted = false;
 			this.init();
 		}
@@ -118,6 +117,16 @@ class GameEngine {
 
 	// Canvas Functions
 
+	createCanvas(width, height) {
+		this.canvas = document.createElement('canvas');
+		this.ctx = this.canvas.getContext('2d');
+
+		this.canvas.width = width;
+		this.canvas.height = height;
+
+		document.body.appendChild(this.canvas);
+	}
+
 	renderText(text, x, y, color, alignment, font) {
 		if (font === undefined) {
 			font = this.defaultFont;
@@ -139,16 +148,6 @@ class GameEngine {
 	}
 
 	// Special Functions
-
-	createCanvas(width, height) {
-		this.canvas = document.createElement('canvas');
-		this.ctx = this.canvas.getContext('2d');
-
-		this.canvas.width = width;
-		this.canvas.height = height;
-
-		document.body.appendChild(this.canvas);
-	}
 
 	collide(a, b) {
 		if (a.x < b.x + b.width && a.x + a.width > b.x) {

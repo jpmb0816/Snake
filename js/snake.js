@@ -45,8 +45,6 @@ class Snake {
 				this.x += this.vx;
 				this.y += this.vy;
 
-				console.log(this.x + ", " + this.y + " = " + this.food.x + ", " + this.food.y);
-				
 				if (this.x < 0) {
 					this.x = this.game.rows - 1;
 				}
@@ -73,10 +71,8 @@ class Snake {
 					this.generateFood();
 					this.game.score += this.game.scorePoints;
 					this.gauge += this.gaugePoints;
-
-					console.log("EATEN");
 				}
-				else if (!this.invulnerable && this.isCollided(this.body[this.body.length - 1].x, this.body[this.body.length - 1].y)) {
+				else if (!this.invulnerable && this.isCollided(this.x, this.y)) {
 					this.alive = false;
 				}
 				
