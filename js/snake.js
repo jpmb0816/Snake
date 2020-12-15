@@ -120,7 +120,6 @@ class Snake {
 			this.food.render(ctx);
 
 			ctx.globalAlpha = this.alpha;
-			ctx.strokeStyle = "white";
 
 			for (let i = 0; i < this.body.length; i++) {
 				if (i < this.body.length - 1) {
@@ -136,8 +135,6 @@ class Snake {
 			if (this.alpha !== 1) {
 				ctx.globalAlpha = 1;
 			}
-
-			ctx.strokeStyle = "black";
 
 			this.game.renderText(this.name, (this.x * this.game.scale) + (this.game.scale / 2), (this.y * this.game.scale) - 10, "white", "center", "15px san-serif");
 		}

@@ -13,7 +13,9 @@ class Food {
 
 	render(ctx) {
 		ctx.fillStyle = this.color;
-		ctx.strokeRect(this.x * this.scale, this.y * this.scale, this.scale, this.scale);
 		ctx.fillRect(this.x * this.scale, this.y * this.scale, this.scale, this.scale);
+
+		ctx.strokeStyle = "white";
+		ctx.strokeRect(this.x * this.scale, this.y * this.scale, this.scale, this.scale);
 	}
 }
