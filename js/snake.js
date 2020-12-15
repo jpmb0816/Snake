@@ -45,7 +45,7 @@ class Snake {
 				this.x += this.vx;
 				this.y += this.vy;
 
-				if (this.x === this.food.x && this.y === this.food.y) {
+				if (this.body[this.body.length - 1].x === this.food.x && this.body[this.body.length - 1].x === this.food.y) {
 					this.delayUpdateLimit = this.delayUpdateMax - Math.floor(this.game.score / 5000);
 
 					if (this.delayUpdateLimit < 1) {
