@@ -45,7 +45,24 @@ class Snake {
 				this.x += this.vx;
 				this.y += this.vy;
 
-				if (this.body[this.body.length - 1].x === this.food.x && this.body[this.body.length - 1].x === this.food.y) {
+				console.log(this.x + ", " + this.y + " = " + this.food.x + ", " + this.food.y);
+				
+				if (this.x < 0) {
+					this.x = this.game.rows - 1;
+				}
+				else if (this.x > this.game.rows - 1) {
+					this.x = 0;
+				}
+				else if (this.y < 0) {
+					this.y = this.game.cols - 1;
+				}
+				else if (this.y > this.game.cols - 1) {
+					this.y = 0;
+				}
+
+				this.updatePosition();
+
+				if (this.x === this.food.x && this.y === this.food.y) {
 					this.delayUpdateLimit = this.delayUpdateMax - Math.floor(this.game.score / 5000);
 
 					if (this.delayUpdateLimit < 1) {
@@ -56,27 +73,13 @@ class Snake {
 					this.generateFood();
 					this.game.score += this.game.scorePoints;
 					this.gauge += this.gaugePoints;
-				}
-				else {
-					if (this.x < 0) {
-						this.x = this.game.rows - 1;
-					}
-					else if (this.x > this.game.rows - 1) {
-						this.x = 0;
-					}
-					else if (this.y < 0) {
-						this.y = this.game.cols - 1;
-					}
-					else if (this.y > this.game.cols - 1) {
-						this.y = 0;
-					}
 
-					this.updatePosition();
-
-					if (!this.invulnerable && this.isCollided(this.body[this.body.length - 1].x, this.body[this.body.length - 1].y)) {
-						this.alive = false;
-					}
+					console.log("EATEN");
 				}
+				else if (!this.invulnerable && this.isCollided(this.body[this.body.length - 1].x, this.body[this.body.length - 1].y)) {
+					this.alive = false;
+				}
+				
 
 				this.delayUpdateTimer = 0;
 			}
